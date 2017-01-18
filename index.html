@@ -12,7 +12,7 @@ var activebox
 var offx, offy
 
 // reorder is just 'resetting z-index' of objects, 'z-index' big -> top
-function reorderDivs(divlist, activeDiv) {
+function lineupDivs(divlist, activeDiv) {
   var tmp = divlist.filter(x => x !== activeDiv)
               .sort((x, y) => x.style['z-index'] > y.style['z-index'])
   for (var i = 0, l = tmp.length; i < l; i++)
@@ -57,10 +57,10 @@ function createBox(id, left, top) {
 window.addEventListener('mousedown', e => {
   offx = nopx(activebox.style.left) - e.pageX
   offy = nopx(activebox.style.top) - e.pageY
-  reorderDivs(boxes, activebox)
+  lineupDivs(boxes, activebox)
 })
 
-window.addEventListener('mousemove', (e) => {
+window.addEventListener('mousemove', e => {
   if (activebox.moving) {
     activebox.style.left = e.pageX + offx + 'px'
     activebox.style.top = e.pageY+ offy + 'px'
